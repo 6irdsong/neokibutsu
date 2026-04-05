@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="64" fill="#1a1a1a"/>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Shippori+Antique+B1&amp;display=swap');
+  </style>
+  <text x="256" y="155" text-anchor="middle" dominant-baseline="central"
+    font-family="'Shippori Antique B1', serif" font-size="110" fill="#e0e0e0" letter-spacing="6">NEO</text>
+  <text x="256" y="360" text-anchor="middle" dominant-baseline="central"
+    font-family="'Shippori Antique B1', serif" font-size="220" fill="#e0e0e0">鬼仏</text>
+</svg>

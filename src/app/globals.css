@@ -1,0 +1,380 @@
+@import "tailwindcss";
+
+@variant dark (&:where(html.dark-mode, html.dark-mode *));
+
+@custom-variant dark (&:where(html.dark-mode, html.dark-mode *));
+
+@theme {
+    --breakpoint-xs: 600px;
+    --color-bg: var(--bg-color);
+    --color-text: var(--text-color);
+    --color-card-bg: var(--card-bg);
+    --color-light-gray: var(--light-gray-color);
+    --color-gray: var(--gray-color);
+    --color-dark-gray: var(--dark-gray-color);
+    --color-accent: var(--accent-color);
+    --color-link: var(--link-color);
+    --color-border: var(--border-color);
+    --color-light-bg: var(--light-bg);
+    --color-details-bg: var(--details-bg);
+    --color-error: var(--error-color);
+    --color-error-bg: var(--error-bg);
+    --color-success: var(--success-color);
+    --color-success-bg: var(--success-bg);
+    --color-btn-text-on-accent: var(--btn-text-on-accent);
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* ========================================
+   Preflight Overrides (restore browser defaults)
+   ======================================== */
+
+@layer base {
+    h1 { margin: 0.67em 0; }
+    h2 { font-size: 1.5em; margin: 0.83em 0; }
+    h3 { font-size: 1.17em; margin: 1em 0; font-weight: bold; }
+    p { margin: 1em 0; }
+    ul, ol { padding-left: 1.5em; }
+    ul { list-style: disc; }
+    ol { list-style: decimal; }
+    a { color: var(--link-color); }
+    hr { border-top: 1px solid var(--border-color); margin: 1em 0; }
+    strong { font-weight: bold; }
+}
+
+/* ========================================
+   CSS Variables
+   ======================================== */
+
+:root {
+    --bg-color: #f4f6f9;
+    --text-color: #333333;
+    --light-gray-color: #e9ecef;
+    --gray-color: #dee2e6;
+    --dark-gray-color: #596167;
+    --accent-color: #333333;
+    --link-color: #0066cc;
+
+    --card-bg: #ffffff;
+    --border-color: #dae1e7;
+    --card-border-color: #c8d1d9;
+    --light-bg: #ffffff;
+    --details-bg: #f8f9fa;
+
+    --error-color: #dc3545;
+    --error-bg: #f8d7da;
+    --success-color: #28a745;
+    --success-bg: #d4edda;
+
+    --button-report-color: #495057;
+    --button-report-bg: #f8f9fa;
+    --button-report-bg-hover: #e2e6ea;
+
+    --button-delete-color: #fff;
+    --button-delete-bg: #495057;
+    --button-delete-bg-hover: #343a40;
+
+    --button-ban-bg: #343a40;
+    --button-ban-bg-hover: #c82333;
+
+    --btn-text-on-accent: #ffffff;
+    --accent-border: #1a1a1a;
+
+    --hupass-bg: #3283cf;
+    --hupass-bg-hover: #2562a0;
+    --hupass-border: #1e5290;
+    --hupass-text: #fff;
+}
+
+html.dark-mode {
+    --bg-color: #121212;
+    --text-color: #e0e0e0;
+    --card-bg: #151515;
+    --light-gray-color: #222;
+    --gray-color: #444;
+    --dark-gray-color: #bbbbbb;
+    --accent-color: #d4d4d4;
+    --border-color: #333;
+    --card-border-color: #444;
+    --light-bg: #151515;
+    --details-bg: #1a1a1a;
+
+    --button-report-bg: #222;
+    --button-report-color: #ccc;
+    --button-report-bg-hover: #333;
+
+    --btn-text-on-accent: #121212;
+    --accent-border: #ababab;
+
+    --button-delete-bg: #d9534f;
+    --button-delete-color: #fff;
+
+    --hupass-bg: #5ba3d9;
+    --hupass-bg-hover: #3d82b8;
+    --hupass-border: #2f6fa3;
+    --hupass-text: #121212;
+
+    --button-ban-bg: #808080;
+
+    --error-bg: #4c1d21;
+    --error-color: #ffb3b3;
+}
+
+/* ========================================
+   Global Resets & Base
+   ======================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--text-color);
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px 20px;
+    background-color: var(--bg-color);
+    overscroll-behavior: none;
+}
+
+h1.site-title {
+    font-family: 'Shippori Antique B1', serif;
+    font-weight: 400;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+html {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+a, button, .post-card {
+    touch-action: manipulation;
+}
+
+/* ========================================
+   Form Elements (global)
+   ======================================== */
+
+html.dark-mode input,
+html.dark-mode textarea,
+html.dark-mode select {
+    background-color: #2d2d2d;
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+}
+
+html.dark-mode th {
+    background: #252525;
+}
+
+select.select-placeholder {
+    color: #aaa;
+}
+
+html.dark-mode select.select-placeholder {
+    color: #555;
+}
+
+input::placeholder {
+    color: #aaa;
+}
+
+html.dark-mode input::placeholder {
+    color: #555;
+}
+
+input[type="text"],
+input[type="password"],
+textarea,
+select {
+    padding: 8px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    background: var(--card-bg);
+    color: var(--text-color);
+    font-size: 16px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    outline: none;
+    box-sizing: border-box;
+}
+
+select {
+    padding: 4px 8px;
+    font-size: 14px;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+textarea:focus,
+select:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.08);
+}
+
+html.dark-mode input[type="text"]:focus,
+html.dark-mode input[type="password"]:focus,
+html.dark-mode textarea:focus,
+html.dark-mode select:focus {
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.08);
+}
+
+textarea {
+    resize: vertical;
+    min-height: 100px;
+    margin-bottom: 20px;
+    width: 100% !important;
+}
+
+/* ========================================
+   Post Card (expand/collapse animation)
+   ======================================== */
+
+.post-card {
+    background: var(--card-bg);
+    border-radius: var(--radius-md);
+    box-shadow: none;
+    padding: 8px 16px;
+    border: 1px solid var(--card-border-color);
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.post-card:hover {
+    border-color: var(--dark-gray-color);
+    box-shadow: none;
+}
+
+.post-card-expanded {
+    border-color: var(--dark-gray-color);
+}
+
+/* Search card slide animation (mobile), spacing (all) */
+.search-card-wrapper {
+    padding-top: 12px;
+}
+
+@media (max-width: 767px) {
+    .search-card-wrapper {
+        overflow: hidden;
+        max-height: 0;
+        padding-top: 0;
+        transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                    padding-top 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .search-card-wrapper.search-card-open {
+        max-height: 250px;
+        padding-top: 12px;
+    }
+    .search-card-wrapper > .search-card-inner {
+        transform: translateY(-100%);
+        opacity: 0;
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                    opacity 0.2s ease;
+    }
+    .search-card-wrapper.search-card-open > .search-card-inner {
+        transform: translateY(0);
+        opacity: 1;
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                    opacity 0.25s ease 0.05s;
+    }
+}
+
+.post-details {
+    display: grid;
+    grid-template-rows: 0fr;
+    opacity: 0;
+    padding: 0 12px 0 4px;
+    margin-top: 0;
+    background-color: transparent;
+    border-radius: var(--radius-sm);
+    transition: grid-template-rows 0.15s ease, opacity 0.1s ease, padding 0.15s ease, margin 0.15s ease;
+}
+
+.post-details-inner {
+    overflow: hidden;
+}
+
+.post-details.expanded {
+    grid-template-rows: 1fr;
+    opacity: 1;
+    padding: 4px 12px 12px 4px;
+    margin-top: 4px;
+}
+
+/* ========================================
+   Copy Prevention
+   ======================================== */
+
+.post-card,
+.post-details {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+body.admin-mode .post-card,
+body.admin-mode .post-details {
+    -webkit-user-select: auto;
+    -moz-user-select: auto;
+    -ms-user-select: auto;
+    user-select: auto;
+}
+
+/* ========================================
+   Mobile Responsive
+   ======================================== */
+
+@media screen and (max-width: 768px) {
+    body {
+        padding: 0 10px 10px;
+    }
+    input,
+    textarea {
+        font-size: 16px;
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes overlayIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes overlayOut {
+    from { opacity: 1; transform: translateY(0); }
+    to { opacity: 0; transform: translateY(20px); }
+}
+
+/* ========================================
+   Touch Device Hover Reset
+   ======================================== */
+
+@media (hover: none) {
+    .post-card:hover {
+        background-color: var(--card-bg);
+        border-color: var(--card-border-color);
+    }
+    .post-card-expanded,
+    .post-card-expanded:hover {
+        border-color: var(--dark-gray-color);
+    }
+}

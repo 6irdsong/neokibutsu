@@ -1,0 +1,37 @@
+name: Daily Database Backup
+
+on:
+  schedule:
+    - cron: '0 18 * * *' # Daily at 3:00 AM JST (18:00 UTC)
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install PostgreSQL 17 client
+        run: |
+          sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+          wget -qO- https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo tee /etc/apt/trusted.gpg.d/pgdg.asc
+          sudo apt-get update
+          sudo apt-get install -y postgresql-client-17
+
+      - name: Run pg_dump
+        env:
+          PGHOST: ${{ secrets.DB_HOST }}
+          PGPORT: ${{ secrets.DB_PORT }}
+          PGUSER: ${{ secrets.DB_USER }}
+          PGPASSWORD: ${{ secrets.DB_PASSWORD }}
+          PGDATABASE: postgres
+          PGSSLMODE: require
+        run: |
+          DATE=$(date +%Y%m%d)
+          pg_dump --no-owner --no-acl > backup_${DATE}.sql
+          echo "Backup size: $(du -h backup_${DATE}.sql | cut -f1)"
+
+      - name: Upload backup artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: db-backup-${{ github.run_id }}
+          path: backup_*.sql
+          retention-days: 30
